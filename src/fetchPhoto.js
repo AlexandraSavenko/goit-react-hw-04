@@ -1,6 +1,8 @@
 import axios from "axios";
 export const fetchPhoto = async (query, page = 1, perPage = 10) => {
-  const responce = await axios.get(`https://api.unsplash.com/photos`, {
+  console.log(query);
+
+  const responce = await axios.get(`https://api.unsplash.com/search/photos`, {
     headers: {
       Authorization: `Client-ID _M2rXGxlX9xDK1iu9GI31ka_JVewW7yHFos3Jc0kt_k`,
       "Accept-Version": "v1",
@@ -11,5 +13,5 @@ export const fetchPhoto = async (query, page = 1, perPage = 10) => {
       per_page: perPage,
     },
   });
-  return responce.data;
+  return responce.data.results;
 };

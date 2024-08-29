@@ -1,12 +1,13 @@
-export default function ImageGallery({ result }) {
+import ImageCard from "../ImageCard/ImageCard";
+
+export default function ImageGallery({ resultsArr }) {
   return (
     <ul>
-      {/* Набір елементів списку із зображеннями */}
-      <li>
-        <div>
-          <img src="" alt="" />
-        </div>
-      </li>
+      {resultsArr.map((image) => (
+        <li key={image.id}>
+          <ImageCard picture={image} />
+        </li>
+      ))}
     </ul>
   );
 }

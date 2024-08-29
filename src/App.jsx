@@ -3,13 +3,16 @@ import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { fetchPhoto } from "./fetchPhoto";
+import LoadMoreButton from "./components/LoadMoreBtn/LoadMoreBtn";
 function App() {
-  const [text, setText] = useState(null);
+  const [text, setText] = useState([]);
   const handleSearch = async (values, actions) => {
-    console.log(values);
     actions.resetForm();
     try {
-      const fetchedPhotos = fetchPhoto(values.searchwords);
+      const fetchedPhotos = await fetchPhoto(values.searchwords);
+      // fetchedPhotos.then((res, rej) => {
+      //   setText(res);
+      // });
       setText(fetchedPhotos);
     } catch (error) {}
   };
@@ -17,7 +20,8 @@ function App() {
   return (
     <div>
       <SearchBar onSubmit={handleSearch} />
-      <ImageGallery result={text} />
+      <ImageGallery resultsArr={text} />
+      {text.length > 0 && <LoadMoreButton />}
     </div>
   );
 }
