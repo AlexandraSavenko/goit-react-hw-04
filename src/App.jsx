@@ -13,30 +13,35 @@ function App() {
   const [topic, setTopic] = useState("");
   const [page, setPage] = useState(1);
 
-  const handleSearch = async (values, actions) => {
+  const handleSearch = (values, actions) => {
     actions.resetForm();
     setTopic(values.searchwords);
     setPage(1);
-    try {
-      setLoading(true);
-      setText([]);
-      setErr(false);
-      const fetchedPhotos = await fetchPhoto(values.searchwords);
-      setText(fetchedPhotos);
-    } catch (error) {
-      setErr(true);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
+    setText([]);
   };
   useEffect(() => {
     if (topic === "") {
       return;
     }
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setErr(false);
+        const fetchedPhotos = await fetchPhoto(topic, page);
+        setText((prevText) =>
+          page === 1 ? fetchedPhotos : [...prevText, ...fetchedPhotos]
+        );
+      } catch (error) {
+        setErr(true);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [page, topic]);
   const handleLoadMore = () => {
-    setPage(page + 1);
+    setPage((prevPage) => prevPage + 1);
   };
   return (
     <div>
