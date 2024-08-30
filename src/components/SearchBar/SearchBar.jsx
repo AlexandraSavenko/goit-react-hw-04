@@ -16,7 +16,7 @@ export default function SearchBar({ onSubmit }) {
             name="searchwords"
           />
           <button className={css.button} type="submit">
-            <BsSearch />
+            <BsSearch className={css.iconbtn} />
           </button>
         </Form>
       </Formik>
