@@ -6,12 +6,15 @@ import { fetchPhoto } from "./fetchPhoto";
 import LoadMoreButton from "./components/LoadMoreBtn/LoadMoreBtn";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import ImageModal from "./components/ImageModal/ImageModal";
 function App() {
   const [text, setText] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(false);
   const [topic, setTopic] = useState("");
   const [page, setPage] = useState(1);
+  const [modal, setModal] = useState(false);
+  const [bigpicture, setBigpicture] = useState(null);
 
   const handleSearch = (values, actions) => {
     actions.resetForm();
@@ -43,13 +46,18 @@ function App() {
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
   };
+  const handleModal = (picture) => {
+    setBigpicture(picture);
+    setModal(true);
+  };
   return (
     <div>
       <SearchBar onSubmit={handleSearch} />
-      <ImageGallery resultsArr={text} />
+      <ImageGallery resultsArr={text} onModalOpen={handleModal} />
       {loading && <Loader />}
       {text.length > 0 && <LoadMoreButton onLoadMore={handleLoadMore} />}
       {err && <ErrorMessage />}
+      <ImageModal onOpen={modal} data={bigpicture} />
     </div>
   );
 }
