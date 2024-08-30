@@ -1,18 +1,23 @@
 import { Field, Form, Formik } from "formik";
+import { BsSearch } from "react-icons/bs";
+import css from "./SearchBar.module.css";
 
 export default function SearchBar({ onSubmit }) {
   return (
-    <header>
+    <header className={css.header}>
       <Formik initialValues={{ searchwords: "" }} onSubmit={onSubmit}>
-        <Form>
+        <Form className={css.form}>
           <Field
+            className={css.input}
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
             name="searchwords"
           />
-          <button type="submit">Search</button>
+          <button className={css.button} type="submit">
+            <BsSearch />
+          </button>
         </Form>
       </Formik>
     </header>
