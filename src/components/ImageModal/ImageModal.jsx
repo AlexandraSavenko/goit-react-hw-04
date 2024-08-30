@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import ReactModal from "react-modal";
 import Loader from "../Loader/Loader";
+import css from "./ImageModal.module.css";
+// import "./ImageModal.css";
 export default function ImageModal({ isOpen, onClose, modalData }) {
   useEffect(() => {
     const handleEsc = (event) => {
@@ -20,8 +22,9 @@ export default function ImageModal({ isOpen, onClose, modalData }) {
       ariaHideApp={true}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
+      overlayClassName={css.overlay}
     >
-      <div>
+      <div className={css.mwrap}>
         {modalData ? (
           <img
             src={modalData && modalData.urls.regular}
