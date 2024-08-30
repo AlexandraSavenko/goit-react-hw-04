@@ -7,6 +7,10 @@ import LoadMoreButton from "./components/LoadMoreBtn/LoadMoreBtn";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
+
 function App() {
   const [text, setText] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -43,12 +47,19 @@ function App() {
     };
     fetchData();
   }, [page, topic]);
+
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
   };
+
   const handleModal = (picture) => {
     setBigpicture(picture);
+    console.log(bigpicture);
     setModal(true);
+  };
+
+  const ModalClose = () => {
+    setModal(false);
   };
   return (
     <div>
@@ -57,7 +68,7 @@ function App() {
       {loading && <Loader />}
       {text.length > 0 && <LoadMoreButton onLoadMore={handleLoadMore} />}
       {err && <ErrorMessage />}
-      <ImageModal onOpen={modal} data={bigpicture} />
+      <ImageModal isOpen={modal} onClose={ModalClose} modalData={bigpicture} />
     </div>
   );
 }
