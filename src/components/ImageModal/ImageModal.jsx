@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import ReactModal from "react-modal";
+import Loader from "../Loader/Loader";
 export default function ImageModal({ isOpen, onClose, modalData }) {
   useEffect(() => {
     const handleEsc = (event) => {
@@ -21,10 +22,14 @@ export default function ImageModal({ isOpen, onClose, modalData }) {
       shouldCloseOnOverlayClick={true}
     >
       <div>
-        <img
-          src={modalData.urls.regular}
-          alt={modalData.urls.alt_description}
-        />
+        {modalData ? (
+          <img
+            src={modalData && modalData.urls.regular}
+            alt={modalData && modalData.urls.alt_description}
+          />
+        ) : (
+          <Loader />
+        )}
       </div>
     </ReactModal>
   );
