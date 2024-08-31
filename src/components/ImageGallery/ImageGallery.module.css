@@ -15,4 +15,5 @@
   width: 100%; /* Take full width of grid column */
   height: 175px; /* Adjust to image's aspect ratio */
   overflow: hidden;
+  position: relative;
 }
