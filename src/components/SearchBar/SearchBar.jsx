@@ -1,14 +1,20 @@
 import { Field, Form, Formik } from "formik";
 import { BsSearch } from "react-icons/bs";
 import css from "./SearchBar.module.css";
+import toast from "react-hot-toast";
 
 export default function SearchBar({ onSubmit }) {
   function validateInput(values) {
-    let errors = {};
+    // let errors = {};
     if (!values.searchwords) {
-      errors.searchwords = "Required";
+      // errors.searchwords = "Required";
+      return toast.error("Write your query, please!", {
+        duration: 4000,
+        position: "top-left",
+        style: { color: "red" },
+      });
+      // return errors;
     }
-    return errors;
   }
   return (
     <header className={css.header}>

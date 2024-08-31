@@ -8,6 +8,7 @@ import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
 import Modal from "react-modal";
+import { Toaster } from "react-hot-toast";
 
 Modal.setAppElement("#root");
 
@@ -63,6 +64,7 @@ function App() {
   return (
     <div>
       <SearchBar onSubmit={handleSearch} />
+      <Toaster />
       <ImageGallery resultsArr={text} onModalOpen={handleModal} />
       {loading && <Loader />}
       {text.length > 0 && <LoadMoreButton onLoadMore={handleLoadMore} />}
