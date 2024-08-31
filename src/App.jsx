@@ -54,7 +54,6 @@ function App() {
 
   const handleModal = (picture) => {
     setBigpicture(picture);
-    console.log(bigpicture);
     setModal(true);
   };
 
