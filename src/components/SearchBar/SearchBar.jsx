@@ -3,9 +3,20 @@ import { BsSearch } from "react-icons/bs";
 import css from "./SearchBar.module.css";
 
 export default function SearchBar({ onSubmit }) {
+  function validateInput(values) {
+    let errors = {};
+    if (!values.searchwords) {
+      errors.searchwords = "Required";
+    }
+    return errors;
+  }
   return (
     <header className={css.header}>
-      <Formik initialValues={{ searchwords: "" }} onSubmit={onSubmit}>
+      <Formik
+        initialValues={{ searchwords: "" }}
+        onSubmit={onSubmit}
+        validate={validateInput}
+      >
         <Form className={css.form}>
           <Field
             className={css.input}
