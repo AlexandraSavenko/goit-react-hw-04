@@ -12,10 +12,11 @@
   background-color: transparent;
 }
 .image {
-  width: 100%;
+  width: auto;
   height: 90vh;
   object-fit: cover;
   object-position: center;
+  margin: 0 auto;
 }
 .loader {
   margin: 0 auto;
