@@ -3,18 +3,6 @@ import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
 
 export default function SearchBar({ onSubmit }) {
-  // function validateInput(values) {
-  //   // let errors = {};
-  //   if (!values.searchwords) {
-  //     // errors.searchwords = "Required";
-  //     return toast.error("Write your query, please!", {
-  //       duration: 4000,
-  //       position: "top-left",
-  //       style: { color: "red" },
-  //     });
-  //     // return errors;
-  //   }
-  // }
   const handleInputSubmit = (event) => {
     event.preventDefault();
     const query = event.target.elements.searchword.value.trim();
@@ -35,7 +23,7 @@ export default function SearchBar({ onSubmit }) {
           type="text"
           className={css.input}
           name="searchword"
-          placeholder="Search"
+          placeholder="Search images and photos"
         />
         <button className={css.button} type="submit">
           <BsSearch className={css.iconbtn} />
