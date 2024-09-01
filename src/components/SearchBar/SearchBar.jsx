@@ -1,45 +1,46 @@
-import { Field, Form, Formik } from "formik";
 import { BsSearch } from "react-icons/bs";
 import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
 
 export default function SearchBar({ onSubmit }) {
-  function validateInput(values) {
-    // let errors = {};
-    if (!values.searchwords) {
-      // errors.searchwords = "Required";
-      return toast.error("Write your query, please!", {
+  // function validateInput(values) {
+  //   // let errors = {};
+  //   if (!values.searchwords) {
+  //     // errors.searchwords = "Required";
+  //     return toast.error("Write your query, please!", {
+  //       duration: 4000,
+  //       position: "top-left",
+  //       style: { color: "red" },
+  //     });
+  //     // return errors;
+  //   }
+  // }
+  const handleInputSubmit = (event) => {
+    event.preventDefault();
+    const query = event.target.elements.searchword.value.trim();
+    if (!query) {
+      toast.error("Write your query, please!", {
         duration: 4000,
         position: "top-left",
         style: { color: "red" },
       });
-      // return errors;
+      return;
     }
-  }
+    onSubmit(query);
+  };
   return (
     <header className={css.header}>
-      <Formik
-        initialValues={{ searchwords: "" }}
-        onSubmit={onSubmit}
-        validate={validateInput}
-      >
-        <Form className={css.form}>
-          <Field
-            className={css.input}
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            name="searchwords"
-          />
-          <button className={css.button} type="submit">
-            <BsSearch className={css.iconbtn} />
-          </button>
-        </Form>
-      </Formik>
+      <form className={css.form} onSubmit={handleInputSubmit}>
+        <input
+          type="text"
+          className={css.input}
+          name="searchword"
+          placeholder="Search"
+        />
+        <button className={css.button} type="submit">
+          <BsSearch className={css.iconbtn} />
+        </button>
+      </form>
     </header>
   );
 }
-// 647868
-//Access key _M2rXGxlX9xDK1iu9GI31ka_JVewW7yHFos3Jc0kt_k
-//Secret key 6KQHeHwgks1F42jK1HpbiDInW8uZZkDmBXpaI7cvxNY

@@ -4,8 +4,6 @@ import Loader from "../Loader/Loader";
 import css from "./ImageModal.module.css";
 // import "./ImageModal.css";
 export default function ImageModal({ isOpen, onClose, modalData }) {
-  console.log(isOpen);
-
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.code === "Escape" && isOpen) {

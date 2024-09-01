@@ -21,14 +21,13 @@ function App() {
   const [modal, setModal] = useState(false);
   const [bigpicture, setBigpicture] = useState(null);
 
-  const handleSearch = (values, actions) => {
-    actions.resetForm();
-    setTopic(values.searchwords);
+  const handleTopicSubmit = (newTopic) => {
+    setTopic(newTopic);
     setPage(1);
     setText([]);
   };
   useEffect(() => {
-    if (topic === "") {
+    if (!topic) {
       return;
     }
     const fetchData = async () => {
@@ -63,7 +62,7 @@ function App() {
   };
   return (
     <div>
-      <SearchBar onSubmit={handleSearch} />
+      <SearchBar onSubmit={handleTopicSubmit} value={topic} />
       <Toaster />
       <ImageGallery resultsArr={text} onModalOpen={handleModal} />
       {loading && <Loader />}
